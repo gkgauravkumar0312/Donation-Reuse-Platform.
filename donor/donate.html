@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Donation - Donation & Reuse Platform</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
+        <header class="header">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                <h1><a href="../index.html">Donation & Reuse Platform</a></h1>
+            </div>
+            <div class="user-info">
+                <span id="userName"></span>
+                <button onclick="logout()" class="btn btn-secondary">Logout</button>
+            </div>
+        </header>
+        
+        <nav class="sidebar">
+            <ul>
+                <li><a href="donor-dashboard.html">Dashboard</a></li>
+                <li><a href="donate.html" class="active">New Donation</a></li>
+                <li><a href="donor-history.html">Donation History</a></li>
+            </ul>
+        </nav>
+        
+        <main class="main">
+            <div class="dashboard-content">
+                <h2>Make a New Donation</h2>
+                
+                <form id="donationForm" class="donation-form">
+                    <div class="form-group">
+                        <label for="itemType">Item Type</label>
+                        <select id="itemType" name="itemType" required>
+                            <option value="">Select Item Type</option>
+                            <option value="clothes">Clothes</option>
+                            <option value="household">Household Items</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="itemName">Item Name</label>
+                        <input type="text" id="itemName" name="itemName" required placeholder="e.g., Winter Jackets, Kitchen Utensils">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" name="quantity" min="1" required placeholder="Number of items">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="3" placeholder="Brief description of items (condition, size, etc.)"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ngo">Select NGO</label>
+                        <select id="ngo" name="ngo" required>
+                            <option value="">Select NGO</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pickupAddress">Pickup Address</label>
+                        <textarea id="pickupAddress" name="pickupAddress" rows="3" required placeholder="Enter complete pickup address"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pickupDate">Preferred Pickup Date</label>
+                        <input type="date" id="pickupDate" name="pickupDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pickupTime">Preferred Pickup Time</label>
+                        <select id="pickupTime" name="pickupTime" required>
+                            <option value="">Select Time</option>
+                            <option value="morning">Morning (9 AM - 12 PM)</option>
+                            <option value="afternoon">Afternoon (12 PM - 4 PM)</option>
+                            <option value="evening">Evening (4 PM - 7 PM)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactPhone">Contact Phone</label>
+                        <input type="tel" id="contactPhone" name="contactPhone" required placeholder="Your phone number for coordination">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Submit Donation</button>
+                    <button type="button" onclick="window.location.href='donor-dashboard.html'" class="btn btn-secondary">Cancel</button>
+                </form>
+                
+                <div id="error-message" class="error-message"></div>
+                <div id="success-message" class="success-message"></div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2026 Donation & Reuse Platform. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/donor.js"></script>
+    
+    <script>
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        
+        function closeMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+        
+        // Close menu when clicking on a link
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard - Donation & Reuse Platform</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
+        <header class="header">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                <h1><a href="../index.html">Donation & Reuse Platform</a></h1>
+            </div>
+            <div class="user-info">
+                <span id="userName"></span>
+                <button onclick="logout()" class="btn btn-secondary">Logout</button>
+            </div>
+        </header>
+        
+        <nav class="sidebar">
+            <ul>
+                <li><a href="donor-dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="donate.html">New Donation</a></li>
+                <li><a href="donor-history.html">Donation History</a></li>
+            </ul>
+        </nav>
+        
+        <main class="main">
+            <div class="dashboard-content">
+                <h2>Donor Dashboard</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Donations</h3>
+                        <p id="totalDonations">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pending Pickups</h3>
+                        <p id="pendingPickups">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Completed Donations</h3>
+                        <p id="completedDonations">0</p>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h3>Recent Donations</h3>
+                    <div id="recentDonations" class="donation-list">
+                        <!-- Recent donations will be populated here -->
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <a href="donate.html" class="btn btn-primary">Make a New Donation</a>
+                    <a href="donor-history.html" class="btn btn-secondary">View All History</a>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2026 Donation & Reuse Platform. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/donor.js"></script>
+    
+    <script>
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        
+        function closeMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+        
+        // Close menu when clicking on a link
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+        });
+    </script>
+</body>
+</html>

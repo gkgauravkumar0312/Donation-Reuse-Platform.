@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Donation & Reuse Platform</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
+        <header class="header">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                <h1><a href="../index.html">Donation & Reuse Platform</a></h1>
+            </div>
+            <div class="user-info">
+                <span id="userName"></span>
+                <button onclick="logout()" class="btn btn-secondary">Logout</button>
+            </div>
+        </header>
+        
+        <nav class="sidebar">
+            <ul>
+                <li><a href="admin-dashboard.html">Dashboard</a></li>
+                <li><a href="verify-ngo.html">Verify NGOs</a></li>
+                <li><a href="reports.html" class="active">Reports</a></li>
+            </ul>
+        </nav>
+        
+        <main class="main">
+            <div class="dashboard-content">
+                <h2>System Reports</h2>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>Total Donations</h3>
+                        <p id="totalDonationsReport">0</p>
+                        <small>All time donations</small>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Pending Pickups</h3>
+                        <p id="pendingPickupsReport">0</p>
+                        <small>Awaiting pickup</small>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Completed Donations</h3>
+                        <p id="completedDonationsReport">0</p>
+                        <small>Successfully delivered</small>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Active Donors</h3>
+                        <p id="activeDonorsReport">0</p>
+                        <small>Donors with donations</small>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Active NGOs</h3>
+                        <p id="activeNgosReport">0</p>
+                        <small>Verified NGOs</small>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Items Donated</h3>
+                        <p id="itemsDonatedReport">0</p>
+                        <small>Total items count</small>
+                    </div>
+                </div>
+                
+                <div class="detailed-reports">
+                    <h3>Detailed Reports</h3>
+                    
+                    <div class="report-section">
+                        <h4>Recent Donations</h4>
+                        <div id="recentDonationsReport" class="donation-list">
+                            <!-- Recent donations will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <div class="report-section">
+                        <h4>Donation by Type</h4>
+                        <div id="donationByType" class="type-stats">
+                            <!-- Donation type statistics will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <div class="report-section">
+                        <h4>Top NGOs</h4>
+                        <div id="topNgos" class="ngo-stats">
+                            <!-- Top NGOs will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2026 Donation & Reuse Platform. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/admin.js"></script>
+    
+    <script>
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        
+        function closeMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+        
+        // Close menu when clicking on a link
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+        });
+    </script>
+</body>
+</html>
